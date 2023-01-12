@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 static class Score
 {
-	static List<int> Ranking;
 	public static int this_Score { get; private set; } =0;
 	public static void SetScore(int score)
 	{

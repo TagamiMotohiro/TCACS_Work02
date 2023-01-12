@@ -39,7 +39,9 @@ public class GameController : MonoBehaviour
         score_Text.text = Score.GetScore().ToString();
         if (Timer.time <= 0)
         {
+            timer_Text.text = "0";
             finish_Text.gameObject.SetActive(true);
+            Invoke("LoadResult", 3);
         }
     }
     IEnumerator CountDown()
