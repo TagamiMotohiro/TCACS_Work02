@@ -7,22 +7,27 @@ using UnityEngine.SceneManagement;
 
 public class Result : MonoBehaviour
 {
+    CompositeDisposable disposables=new CompositeDisposable();
     LoadRanking ranking = new LoadRanking();
-    [SerializeField]
-    TextMeshProUGUI[] Ranking_Text=new TextMeshProUGUI[5];
     List<int> rank= new List<int>();
     [SerializeField]
+    TextMeshProUGUI[] Ranking_Text=new TextMeshProUGUI[5];
+    [SerializeField]
     UnityEngine.UI.Button returnTitle_Button;
-    CompositeDisposable disposables=new CompositeDisposable();
     // Start is called before the first frame update
     void Start()
     {
-        rank = ranking.SetRanking(Score.this_Score);
+        rank = ranking.SetRanking(Score.now_Score);
+        //今回のスコアを使用してランキングをソート
+        ranking.SaveRanking(rank);
+        //ソート結果をローカルに保存
         for (int i = 0; i < 5; i++)
         {
+            //テキストに出力
             Ranking_Text[i].text = (i + 1).ToString() + "位　:" + rank[i].ToString()+"点";
         }
-        returnTitle_Button.OnClickAsObservable().Subscribe(_ => ReturnTitle()).AddTo(disposables);
+        //タイトルへ戻るボタンイベント処理
+        returnTitle_Button.OnClickAsObservable().Subscribe(_=> ReturnTitle()).AddTo(disposables);
     }
     void ReturnTitle()
     {

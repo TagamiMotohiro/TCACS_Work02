@@ -13,6 +13,7 @@ public class Title : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //メインゲームへ遷移させるボタンイベント処理
 		gameStart_button.OnClickAsObservable().Subscribe(_ => Gamestart()).AddTo(disposables);
 	}
 

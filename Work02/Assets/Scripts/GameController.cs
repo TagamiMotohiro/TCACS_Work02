@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         StartCoroutine("CountDown");
-        
+        //コルーチンでカウントダウンを起動
     }
 
     // Update is called once per frame
@@ -35,12 +35,17 @@ public class GameController : MonoBehaviour
     {
         if (!Timer.timerStart) { return; }
         Timer.TimerCount();
-        timer_Text.text = Timer.time.ToString();
+        //別クラスに時間をカウントさせる
+        timer_Text.text = Timer.time.ToString("F3");
+        //スコア表示を更新
         score_Text.text = Score.GetScore().ToString();
         if (Timer.time <= 0)
         {
+            //時間切れしたらタイマーがマイナスの世界に行くので0に
             timer_Text.text = "0";
+            //ゲーム終了を告知
             finish_Text.gameObject.SetActive(true);
+            //3秒後にリザルトへ遷移
             Invoke("LoadResult", 3);
         }
     }
@@ -48,11 +53,15 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < CountMax; i++)
         {
+            //1秒ずつ待ってカウント減少
             count_Text.text = (CountMax - i).ToString();
             yield return new WaitForSeconds(1);
         }
+        //タイマーのカウントを開始
         Timer.SetStart();
+        //カウント用のテキストは邪魔なので消滅
         count_Text.gameObject.SetActive(false);
+        //ボタン管理のスクリプトを使用可能に
         ButtonManeger.enabled = true;
         yield break;
     }
