@@ -51,6 +51,7 @@ public class ButtonManeger : MonoBehaviour
         Debug.Log("クリックされた");
         //スコアに1プラス
         Score.PlusScore(1);
+        this.GetComponent<GameController>().PlusTime(0.5f);
         //ボタンの色を戻す
         button.gameObject.GetComponent<Image>().color = Color.gray;
         //クリックイベントの購読を解除

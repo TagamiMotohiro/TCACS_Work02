@@ -69,4 +69,8 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene("Result");
     }
+    public void PlusTime(float input)
+    {
+        Timer.PlusTime(input);
+    }
 }

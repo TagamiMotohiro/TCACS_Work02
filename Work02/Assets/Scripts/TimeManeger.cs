@@ -19,4 +19,8 @@ public class TimeManeger
     { 
         time = Input;
     }
+    public void PlusTime(float input)
+    { 
+        time += input;
+    }
 }
